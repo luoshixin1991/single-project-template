@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- GroupID格式：com.{公司/BU(公司的事业部)}.业务线[.子业务线]，最多4级 -->
+    <groupId>com.boxuegu.crm</groupId>
+    <!-- ArtifactID格式：产品线名-模块名。语义不重复不遗漏，先到中央仓库去查证一下 -->
+    <artifactId>crm</artifactId>
+    <!--
+      版本号命名方式：主版本号.次版本号.修订号
+      1）主版本号：产品方向改变，或者大规模API不兼容，或者架构不兼容升级。
+      2）次版本号：保持相对兼容性，增加主要功能特性，影响范围极小的API不兼容修改。
+      3）修订号：保持完全兼容性，修复BUG、新增次要功能特性等。
+      说明：注意起始版本号必须为：1.0.0，而不是0.0.1，线上应用不要依赖SNAPSHOT版本（安全包除外）
+
+      多模块开发命名规范：
+      1）同一项目中所有模块版本保持一致
+      2）子模块统一继承父模块的版本
+      3）统一在顶层模块Pom的<dependencyManagement/>节中定义所有子模块的依赖版本号，子模块中添加依赖时不要添加版本号
+      4）开发测试阶段使用SNAPSHOT
+      5）生产发布使用RELEASE6、新版本迭代只修改顶层POM中的版本
+      -->
+    <version>1.0.0</version>
+    <!--
+    项目的全名称，可以是大写空格多个词，比如 Spring Boot Starter Parent；
+    一般是实际使用中，我们可以把name的值赋成和artifactId一样的
+    -->
+    <name>crm</name>
+    <description>博学谷crm项目</description>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.4</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- ===================== 引入openfeign begin ===================== -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+
+        <!-- 不引用这个会报错-->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-gson</artifactId>
+            <version>11.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <version>2.2.9.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+            <version>11.6</version>
+        </dependency>
+        <!-- ===================== 引入openfeign end ===================== -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>aliyun-repos</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyun-plugin</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.5.4</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

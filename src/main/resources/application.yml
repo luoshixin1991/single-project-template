@@ -1,0 +1,43 @@
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /crm
+  max-http-header-size: 128KB
+
+spring:
+  application:
+    name: crm
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:test}
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 10MB
+
+feign:
+  circuitbreaker:
+    # 开启hystrix（feign.hystrix.enabled=true是旧版本的hystrix的配置，
+    # 但是试过将spring-cloud-starter-netflix-hystrix的版本降到最低用旧版的配置还是不行）
+    enabled: true
+  httpclient:
+    # 让feign使用Apache HTTPClient做请求，而不是默认的urlConnection
+    enabled: true
+    # Hystrix的超时时间设置为10秒
+    connection-timeout: 10000
+    # feign最大连接数
+    max-connections: 200
+    # feign单个路径的最大连接数
+    max-connections-per-route: 50
+
+logging:
+  level:
+    # 此包下所有class以DEBUG级别输出
+    com.boxuegu.crm: debug
+#配置logback
+#如果只是想配置日志级别和日志文件保存路径的话，直接在application.yml中配置，配置方法如下
+#logging:
+#  level:
+#    root: info # 根日志，默认级别是info，如果使用info，可以不写这一行
+#    com.moyundong.dao: debug # 子级别日志，可以指定到自己的某个包
+#  file: d:/log/springboot-test04.log # 定义日志文件的路径，可以是相对路径也可以是绝对路径,不同版本的springboot配置名可能不同
+

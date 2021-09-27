@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!--引入默认的一些设置-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!--
+      每个logger都关联到logger上下文，默认上下文名称为“default”。
+      但可以使用<contextName>设置成其他名字，用于区分不同应用程序的记录。一旦设置，不能修改
+    -->
+    <contextName>crm</contextName>
+
+    <!-- <springProperty> 读取application.yml中的属性值 -->
+    <springProperty name="fileDir" source="spring.application.name" defaultValue="crm"/>
+    <springProperty name="profile" source="spring.profiles.active" defaultValue="dev"/>
+
+    <!-- <property> 用来定义变量值，它有两个属性name和value，通过<property>定义的值会被插入到logger上下文中，可以使“${}”来使用变量 -->
+    <property name="log.path" value="/tmp/logs/${fileDir}/${profile}"/>
+    <property name="package" value="com.boxuegu"/>
+    <!--
+      格式化输出：%d表示日期；%thread表示线程名；%-5level：级别从左显示5个字符宽度；
+      %logger{50} 表示logger名字最长50个字符，否则按照句点分割；%msg：日志消息；%n是换行符
+    -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"/>
+
+    <!-- <jmxConfigurator/> 可以使用Jconsole查看服务器Logback日志输出 -->
+    <jmxConfigurator/>
+
+    <!-- 写入日志到控制台的appender,用默认的,但是要去掉charset,否则windows下tomcat下乱码 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- <appender> 输出器, Logback 将输出日志记录的任务交给名为 appender 的组件来完成 -->
+    <appender name="root" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--
+          <rollingPolicy>用来设置日志的滚动策略，当达到条件后会自动将条件前的日志生成一个备份日志文件，条件后的日志输出到最新的日志文件中。
+          常用的是按照时间来滚动（使用的类TimeBaseRollingPolicy）,还有一种就是基于索引来实现（使用的类FixedWindowRollingPolicy）
+        -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- <fileNamePattern> 用来设置滚动生成文件的格式，这里设置精确到天，也就是按天来滚动，如果设置成秒，就是按秒来滚动 -->
+            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/root-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+            <!--滚动策略:日志文件大于100MB时生成一个新的日志文件，每天生成一个新的日志文件-->
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- <maxHistory> 设置最大的文件数，比如按天滚动，这里设置了7天，在第8天日志生成的时候，第一天的日志就会被删除 -->
+            <maxHistory>7</maxHistory>
+            <!-- <totalSizeCap>所有的归档日志的大小。当超过限制时，会删掉旧的归档日志 -->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <!-- Appender是logback中最重要的组件之一,它委托encoder组件来完成LoggingEvent的格式化和记录 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="infoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- LevelFilter通过定义日志级别，并设置匹配与不匹配的处理策略来控制针对某个级别日志的输出策略 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <!--
+              log4j定义了8个级别的log（除去OFF和ALL，可以说分为6个级别），
+              优先级从高到低依次为：OFF、FATAL、ERROR、WARN、INFO、DEBUG、TRACE、 ALL
+              onMatch和onMismatch都有三个属性值，分别为Accept、DENY和NEUTRAL
+              分别介绍这两个配置项的三个属性值：
+              onMatch="ACCEPT" 表示匹配该级别及以上
+              onMatch="DENY" 表示不匹配该级别及以上
+              onMatch="NEUTRAL" 表示该级别及以上的，由下一个filter处理，如果当前是最后一个，则表示匹配该级别及以上
+              onMismatch="ACCEPT" 表示匹配该级别以下
+              onMismatch="NEUTRAL" 表示该级别及以下的，由下一个filter处理，如果当前是最后一个，则不匹配该级别以下的
+              onMismatch="DENY" 表示不匹配该级别以下的
+            -->
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/info-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <!-- Appender是logback中最重要的组件之一,它委托encoder组件来完成LoggingEvent的格式化和记录 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/error-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--生产环境:打印控制台和输出到文件-->
+    <springProfile name="prod">
+        <!--
+          <logger>标签的作用：为不同的包使用不同的log配置
+          logger的默认配置具有继承特性， 即所有的logger配置继承根logger(<root>),若使用了additivity="false"表示不继承父logger的配置
+        -->
+        <logger name="${package}" level="INFO">
+            <appender-ref ref="infoLog"/>
+        </logger>
+        <logger name="${package}" level="ERROR">
+            <appender-ref ref="errorLog"/>
+        </logger>
+        <!--
+          SpringBoot 项目，如果使用单独的 LogBack 配置文件，
+          SpringBoot 的配置文件 application.properties 配置的 logging.level.root
+          将会覆盖的 Logback 配置文件中的 root 的配置，所以<root>和<logger>中设置level不会起作用
+        -->
+        <root level="INFO">
+            <appender-ref ref="root"/>
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+    <!--测试环境:打印控制台-->
+    <springProfile name="test">
+        <!--
+          <logger>标签的作用：为不同的包使用不同的log配置
+          logger的默认配置具有继承特性， 即所有的logger配置继承根logger(<root>),若使用了additivity="false"表示不继承父logger的配置
+        -->
+        <logger name="${package}" level="INFO">
+            <appender-ref ref="infoLog"/>
+        </logger>
+        <logger name="${package}" level="ERROR">
+            <appender-ref ref="errorLog"/>
+        </logger>
+        <!--
+          SpringBoot 项目，如果使用单独的 LogBack 配置文件，
+          SpringBoot 的配置文件 application.properties 配置的 logging.level.root
+          将会覆盖的 Logback 配置文件中的 root 的配置，所以<root>和<logger>中设置level不会起作用
+        -->
+        <root level="INFO">
+            <appender-ref ref="root"/>
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+    <!--开发环境:打印控制台-->
+    <springProfile name="dev">
+        <!--
+          如果将<logger> level设置在某一个级别上，那么比此级别优先级高的log都能打印出来。
+          例如，如果设置优先级为WARN，那么OFF、FATAL、ERROR、WARN 4个级别的log能正常输出，而INFO、DEBUG、TRACE、 ALL级别的log则会被忽略。
+          Log4j建议只使用四个级别，优先级从高到低分别是ERROR、WARN、INFO、DEBUG。
+        -->
+        <!--
+          SpringBoot 项目，如果使用单独的 LogBack 配置文件，
+          SpringBoot 的配置文件 application.properties 配置的 logging.level.root
+          将会覆盖的 Logback 配置文件中的 root 的配置，所以<root>和<logger>中设置level不会起作用
+        -->
+        <root level="INFO">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+</configuration>

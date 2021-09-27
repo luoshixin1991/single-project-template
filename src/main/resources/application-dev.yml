@@ -1,0 +1,3 @@
+boxuegu:
+  url: ${BXG_URL:http://bxg-admin-open-api.boxuegu.com}
+
