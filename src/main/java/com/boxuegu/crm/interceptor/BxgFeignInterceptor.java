@@ -12,10 +12,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class BxgFeignInterceptor implements RequestInterceptor {
-
     @Override
     public void apply(RequestTemplate requestTemplate) {
         requestTemplate.header("token", "在这里添加请求头");
     }
-
 }

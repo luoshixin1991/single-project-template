@@ -10,7 +10,6 @@ import java.io.StringWriter;
  * @date 2021/9/23 14:19
  */
 public class ErrorUtil {
-
     /**
      * 获取异常栈信息
      *
@@ -22,6 +21,4 @@ public class ErrorUtil {
         throwable.printStackTrace(new PrintWriter(writer));
         return writer.toString();
     }
-
-
 }

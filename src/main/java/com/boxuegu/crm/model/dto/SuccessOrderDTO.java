@@ -12,7 +12,6 @@ import lombok.ToString;
 @Data
 @ToString
 public class SuccessOrderDTO {
-
     /**
      * 首次交齐学费的订单id
      */
@@ -21,5 +20,4 @@ public class SuccessOrderDTO {
      * 首次成功关单的订单id
      */
     private String firstSuccessCloseOrderId;
-
 }

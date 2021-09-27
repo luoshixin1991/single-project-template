@@ -17,7 +17,6 @@ import javax.annotation.Resource;
 @Slf4j
 @Component
 public class BxgFeignFallbackFactory implements FallbackFactory<BxgFeignApi> {
-
     @Resource
     private BxgFeignHystrix bxgFeignHystrix;
 
@@ -27,5 +26,4 @@ public class BxgFeignFallbackFactory implements FallbackFactory<BxgFeignApi> {
                 ErrorUtil.getStackTraceAsString(cause));
         return bxgFeignHystrix;
     }
-
 }

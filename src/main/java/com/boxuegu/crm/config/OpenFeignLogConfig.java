@@ -15,7 +15,6 @@ import java.util.Objects;
  */
 @Configuration
 public class OpenFeignLogConfig {
-
     @Value("${spring.profiles.active}")
     private String profilesActive;
 

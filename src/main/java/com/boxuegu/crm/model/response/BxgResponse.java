@@ -1,4 +1,4 @@
-package com.boxuegu.crm.model.dto;
+package com.boxuegu.crm.model.response;
 
 import lombok.*;
 
@@ -14,7 +14,6 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class BxgResponse<T> {
-
     /**
      * 状态码
      */
@@ -27,5 +26,4 @@ public class BxgResponse<T> {
      * 结果
      */
     private T result;
-
 }

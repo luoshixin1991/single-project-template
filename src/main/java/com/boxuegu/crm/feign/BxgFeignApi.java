@@ -2,7 +2,7 @@ package com.boxuegu.crm.feign;
 
 import com.boxuegu.crm.feign.fallback.BxgFeignFallbackFactory;
 import com.boxuegu.crm.interceptor.BxgFeignInterceptor;
-import com.boxuegu.crm.model.dto.BxgResponse;
+import com.boxuegu.crm.model.response.BxgResponse;
 import com.boxuegu.crm.model.dto.SuccessOrderDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
         configuration = BxgFeignInterceptor.class
 )
 public interface BxgFeignApi {
-
     /**
      * 根据订单id查询首次交齐学费的订单id和首次成功关单的订单id
      *
@@ -31,5 +30,4 @@ public interface BxgFeignApi {
      */
     @GetMapping("/crm/order/first/transfer")
     BxgResponse<SuccessOrderDTO> findFirstOrderTransfer(@RequestParam(value = "orderId") String orderId);
-
 }
