@@ -51,6 +51,18 @@ public class Response<T> implements Serializable {
     }
 
     /**
+     * 失败的响应结果
+     *
+     * @param errorCode 错误码
+     */
+    public static <T> Response<T> fail(ErrorCode errorCode, String errorMsg){
+        Response<T> resp = new Response<>();
+        resp.setCode(errorCode.getCode());
+        resp.setMessage(errorMsg);
+        return resp;
+    }
+
+    /**
      * 响应结果
      *
      * @param errorCode http响应码
@@ -74,5 +86,17 @@ public class Response<T> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public T getData() {
+        return data;
     }
 }
