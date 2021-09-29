@@ -8,7 +8,7 @@ spring:
   application:
     name: crm
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:test}
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   servlet:
     multipart:
       max-request-size: 100MB
