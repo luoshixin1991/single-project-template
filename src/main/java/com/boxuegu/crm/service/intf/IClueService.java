@@ -11,5 +11,4 @@ import com.boxuegu.crm.model.entity.Clue;
  * @since 2021-09-30
  */
 public interface IClueService extends IService<Clue> {
-
 }

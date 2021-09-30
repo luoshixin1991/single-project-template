@@ -6,10 +6,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.boxuegu.crm.mapper.ClueMapper;
 import com.boxuegu.crm.model.dto.CustomerClueDTO;
 import com.boxuegu.crm.model.entity.Clue;
+import com.boxuegu.crm.service.intf.IClueService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * TODO: 类说明注释
@@ -22,6 +27,8 @@ import javax.annotation.Resource;
 public class MybatisPlusTests {
     @Resource
     private ClueMapper clueMapper;
+    @Resource
+    private IClueService clueService;
 
     @Test
     public void testFind() {
@@ -45,14 +52,20 @@ public class MybatisPlusTests {
                 .operator("")
                 .build();
         Integer count = clueMapper.insert(clue);
+//        Boolean success = clueService.saveBatch(Arrays.asList(clue, clue));
         log.info("新增数量: {}, 自增id: {}", count, clue.getId());
+    }
+
+    @Test
+    public void test(){
+        clueService.removeById(22278508757L);
     }
 
     /**
      * t_clue单表分页
      */
     @Test
-    public void testCluePage(){
+    public void testCluePage() {
         // 设置分页信息
         IPage<Clue> pageSetting = new Page<>(1, 20);
         // 条件构造器
@@ -68,14 +81,14 @@ public class MybatisPlusTests {
                 cluePage.getPages(),
                 cluePage.getCurrent(),
                 cluePage.getRecords()
-                );
+        );
     }
 
     /**
      * 自定义查询分页
      */
     @Test
-    public void testCustomCluePage(){
+    public void testCustomCluePage() {
         // 设置分页信息
         Page<CustomerClueDTO> pageSetting = new Page<>(1, 20);
         IPage<CustomerClueDTO> customerCluePage = clueMapper.findCustomerClues(pageSetting, 93451);

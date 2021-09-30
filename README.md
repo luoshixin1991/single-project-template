@@ -251,6 +251,16 @@ spring:
       connection-timeout: 10000
       # 创建连接前默认执行的sql语句，如果语句执行失败连接则失败，然后重试连接，默认值无。
       connection-init-sql: "set names utf8mb4;"
+      
+mybatis-plus:
+  global-config:
+    db-config:
+      # 全局逻辑删除的实体字段名
+      logic-delete-field: deleted
+      # 逻辑已删除值(默认为 1)
+      logic-delete-value: 1
+      # 逻辑未删除值(默认为 0)
+      logic-not-delete-value: 0 
 
 3、配置分页插件com.boxuegu.crm.config.MybatisPlusConfig.mybatisPlusInterceptor
 
