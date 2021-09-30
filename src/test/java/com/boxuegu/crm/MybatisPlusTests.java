@@ -10,14 +10,12 @@ import com.boxuegu.crm.service.intf.IClueService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+
 
 /**
- * TODO: 类说明注释
+ * mybatis-plus示例
+ * 文档https://mp.baomidou.com/guide/logic-delete.html#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
  *
  * @author lsx
  * @date 2021/9/30 15:26
