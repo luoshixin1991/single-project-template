@@ -103,6 +103,7 @@ boxuegu:
      com.boxuegu.crm.interceptor.BxgFeignInterceptor         请求头设置
      com.boxuegu.crm.config.OpenFeignLogConfig               打印请求体信息，最好使用的时候引入，不用就删除  
 ```
+
 ### 集成logback
 
 ```
@@ -138,6 +139,83 @@ ERROR：只输出ERROR级别日志
 项目子日志(<logger>)：包级别的日志，一个项目可以有多个子日志。
 没有特别指明的地方都用的是根日志规则，有子日志的地方用的是子日志的规则
 ```
+
+### 集成redis
+
+```
+一、在 springboot 1.5.x版本的默认的Redis客户端是 Jedis实现的，springboot 2.x版本中默认客户端是用 lettuce实现的。
+
+Lettuce 与 Jedis 比较
+
+1、Lettuce 和 Jedis 的都是连接 Redis Server的客户端。
+
+2、Jedis 在实现上是直连 redis server，多线程环境下非线程安全，除非使用连接池，为每个 redis实例增加物理连接。
+Lettuce 是 一种可伸缩，线程安全，完全非阻塞的Redis客户端，多个线程可以共享一个RedisConnection,它利用Netty NIO 框架来高效地管理多个连接，从而提供了异步和同步数据访问方式，用于构建非阻塞的反应性应用程序。
+
+二、Lettuce 集成 Redis 服务
+
+1、引入依赖
+
+        <!-- ===================== 引入redis begin ===================== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <!-- ===================== 引入redis end ===================== -->
+
+2、配置信息
+
+spring:
+  redis:
+    ################ Redis 基础配置 begin ##############
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: ${REDIS_HOST:redis-uat.boxuegu.com}
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: ${REDIS_PASSWORD:boxuegu}
+    # 链接超时时间 单位 ms（毫秒）
+    timeout: 10000
+    ################ Redis 基础配置 end ##############
+    ################ Redis 线程池设置 begin ##############
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: -1
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
+    ################ Redis 线程池设置 end ##############
+
+3、设置序列化器
+com.boxuegu.crm.config.LettuceRedisConfig.redisTemplate
+
+4、如果redis客户端使用JdkSerializationRedisSerializer序列化器，所有要需要序列化的类必须实现Serializable接口，
+且最好显示声明serialVersionUID变量；如果使用的是Jackson2JsonRedisSerializer序列化器，则需要序列化的类无需实现Serializable接口。
+RedisTemplate默认采用的是JDK的序列化策略，保存的key和value都是采用此策略序列化保存的。序列化类为：JdkSerializationRedisSerializer
+
+
+5、引入RedisManager操作类com.boxuegu.crm.manager.RedisManager
+
+三、使用springboot的缓存注解
+
+1、配置CacheManager的序列化器和设置过期时间为1小时，org.springframework.cache.CacheManager
+
+2、在启动类上加入@EnableCaching，启用缓存功能
+
+3、使用示例com.boxuegu.crm.service.impl.TestCacheServiceImpl
+```
+
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)

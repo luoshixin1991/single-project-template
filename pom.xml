@@ -69,7 +69,7 @@
         </dependency>
         <!-- ===================== 引入openfeign end ===================== -->
 
-        <!-- 引入redis begin -->
+        <!-- ===================== 引入redis begin ===================== -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -79,7 +79,7 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
-        <!-- 引入redis end -->
+        <!-- ===================== 引入redis end ===================== -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

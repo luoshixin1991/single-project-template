@@ -1,6 +1,7 @@
 package com.boxuegu.crm.redis;
 
 import com.boxuegu.crm.manager.RedisManager;
+import com.boxuegu.crm.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,5 +33,11 @@ public class RedisTests {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Test
+    public void testUser(){
+        redisManager.set("userName","张三");
+        redisManager.set("user", User.builder().id(10L).name("张三").build());
     }
 }

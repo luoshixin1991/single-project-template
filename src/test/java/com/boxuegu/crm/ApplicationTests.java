@@ -1,21 +1,19 @@
 package com.boxuegu.crm;
 
 import com.boxuegu.crm.feign.BxgFeignApi;
+import com.boxuegu.crm.manager.RedisManager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import javax.annotation.Resource;
-
-import static com.boxuegu.crm.common.util.CheckUtil.check;
 
 @Slf4j
 @SpringBootTest
 class ApplicationTests {
-
     @Resource
     private BxgFeignApi bxgFeignApi;
+    @Resource
+    private RedisManager redisManager;
 
     @Test
     void testFeignApi(){
@@ -27,8 +25,5 @@ class ApplicationTests {
 
     @Test
     void contextLoads() {
-
-        check(false, "空指针", IllegalArgumentException.class);
-
     }
 }

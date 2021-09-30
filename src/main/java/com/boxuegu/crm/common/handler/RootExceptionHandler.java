@@ -19,7 +19,7 @@ import static com.boxuegu.crm.common.bean.Response.fail;
  */
 @Slf4j
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class RootExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = IllegalArgumentException.class)
     public Response<Void> illegalArgumentExceptionHandler(IllegalArgumentException ex) {

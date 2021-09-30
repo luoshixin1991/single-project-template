@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
  * user实体类
  *
@@ -17,8 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User implements Serializable {
-    private static final long serialVersionUID = 9137203164655384103L;
+public class User {
     /**
      * 用户id
      */
