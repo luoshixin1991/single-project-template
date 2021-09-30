@@ -57,7 +57,7 @@ public class MybatisPlusTests {
     }
 
     @Test
-    public void test(){
+    public void testLogicDelete(){
         clueService.removeById(22278508757L);
     }
 
