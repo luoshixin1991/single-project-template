@@ -1,4 +1,4 @@
-package com.boxuegu.crm.redis;
+package com.boxuegu.crm;
 
 import com.boxuegu.crm.manager.RedisManager;
 import com.boxuegu.crm.model.entity.User;

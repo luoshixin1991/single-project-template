@@ -216,6 +216,46 @@ RedisTemplate默认采用的是JDK的序列化策略，保存的key和value都�
 3、使用示例com.boxuegu.crm.service.impl.TestCacheServiceImpl
 ```
 
+### 集成mybatis plus
+
+```
+1、添加依赖
+        <!-- ===================== 引入mybatis plus begin ===================== -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.26</version>
+        </dependency>
+        <!-- ===================== 引入mybatis plus end ===================== -->
+
+2、数据库配置和连接池配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://mysql-uat.boxuegu.com:3307/crm?useUnicode=true&zeroDateTimeBehavior=convertToNull&useAffectedRows=true}
+    username: ${SPRING_DATASOURCE_USERNAME:crm}
+    password: ${SPRING_DATASOURCE_PASSWORD:uatdjasiasfds}
+    # 数据源连接池配置
+    hikari:
+      # 最大连接数
+      maximum-pool-size: 20
+      # 最小连接数
+      minimum-idle: 5
+      # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+      connection-timeout: 10000
+      # 创建连接前默认执行的sql语句，如果语句执行失败连接则失败，然后重试连接，默认值无。
+      connection-init-sql: "set names utf8mb4;"
+
+3、启动类上加@MapperScan扫描所有的mapper类（或者在每个mapper类上加@Mapper注解，但是每个类都加很麻烦）
+```
+
+
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)

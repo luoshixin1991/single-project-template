@@ -28,3 +28,19 @@ spring:
         min-idle: 0
     ################ Redis 线程池设置 end ##############
 
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://mysql-uat.boxuegu.com:3307/crm?useUnicode=true&zeroDateTimeBehavior=convertToNull&useAffectedRows=true}
+    username: ${SPRING_DATASOURCE_USERNAME:crm}
+    password: ${SPRING_DATASOURCE_PASSWORD:uatdjasiasfds}
+    # 数据源连接池配置
+    hikari:
+      # 最大连接数
+      maximum-pool-size: 20
+      # 最小连接数
+      minimum-idle: 5
+      # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+      connection-timeout: 10000
+      # 创建连接前默认执行的sql语句，如果语句执行失败连接则失败，然后重试连接，默认值无。
+      connection-init-sql: "set names utf8mb4;"
+

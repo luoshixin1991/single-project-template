@@ -1,2 +1,45 @@
 boxuegu:
   url: ${BXG_URL:http://bxg-admin-open-api.boxuegu.com}
+
+spring:
+  redis:
+    ################ Redis 基础配置 begin ##############
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: ${REDIS_HOST:redis-uat.boxuegu.com}
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: ${REDIS_PASSWORD:boxuegu}
+    # 链接超时时间 单位 ms（毫秒）
+    timeout: 10000
+    ################ Redis 基础配置 end ##############
+    ################ Redis 线程池设置 begin ##############
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: -1
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
+    ################ Redis 线程池设置 end ##############
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://mysql-uat.boxuegu.com:3307/crm?useUnicode=true&zeroDateTimeBehavior=convertToNull&useAffectedRows=true}
+    username: ${SPRING_DATASOURCE_USERNAME:crm}
+    password: ${SPRING_DATASOURCE_PASSWORD:uatdjasiasfds}
+    # 数据源连接池配置
+    hikari:
+      # 最大连接数
+      maximum-pool-size: 20
+      # 最小连接数
+      minimum-idle: 5
+      # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+      connection-timeout: 10000
+      # 创建连接前默认执行的sql语句，如果语句执行失败连接则失败，然后重试连接，默认值无。
+      connection-init-sql: "set names utf8mb4;"
