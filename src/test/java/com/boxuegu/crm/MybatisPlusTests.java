@@ -50,7 +50,7 @@ public class MybatisPlusTests {
                 .operator("")
                 .build();
         Integer count = clueMapper.insert(clue);
-//        Boolean success = clueService.saveBatch(Arrays.asList(clue, clue));
+        // Boolean success = clueService.saveBatch(Arrays.asList(clue, clue));
         log.info("新增数量: {}, 自增id: {}", count, clue.getId());
     }
 
