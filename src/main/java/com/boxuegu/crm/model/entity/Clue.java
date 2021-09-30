@@ -3,6 +3,8 @@ package com.boxuegu.crm.model.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +18,8 @@ import java.time.LocalDateTime;
  * @since 2021-09-30
  */
 @Data
+@AllArgsConstructor
+@Builder
 @TableName("t_clue")
 public class Clue implements Serializable {
     private static final long serialVersionUID = -2429575091044727243L;

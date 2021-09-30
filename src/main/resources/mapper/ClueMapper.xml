@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boxuegu.crm.mapper.ClueMapper">
+
+    <select id="findCustomerClues" resultType="com.boxuegu.crm.model.dto.CustomerClueDTO">
+        SELECT cus.`name` customerName, c.id clueId
+        FROM t_clue c
+                 INNER JOIN t_customer cus ON cus.id = c.customer_id
+        WHERE c.deleted = 0
+          AND c.belonger_id = #{belongerId}
+    </select>
+</mapper>

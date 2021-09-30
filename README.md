@@ -252,7 +252,9 @@ spring:
       # 创建连接前默认执行的sql语句，如果语句执行失败连接则失败，然后重试连接，默认值无。
       connection-init-sql: "set names utf8mb4;"
 
-3、启动类上加@MapperScan扫描所有的mapper类（或者在每个mapper类上加@Mapper注解，但是每个类都加很麻烦）
+3、配置分页插件com.boxuegu.crm.config.MybatisPlusConfig.mybatisPlusInterceptor
+
+4、启动类上加@MapperScan扫描所有的mapper类（或者在每个mapper类上加@Mapper注解，但是每个类都加很麻烦）
 ```
 
 
