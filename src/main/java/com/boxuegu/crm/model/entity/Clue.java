@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 
 /**
  * 线索
+ * @Data相当于@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode这5个注解的合集
  *
  * @author lsx
  * @since 2021-09-30

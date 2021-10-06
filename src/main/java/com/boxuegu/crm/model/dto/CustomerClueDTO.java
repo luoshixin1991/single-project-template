@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 客户线索信息
+ * @Data相当于@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode这5个注解的合集
  *
  * @author lsx
  * @date 2021/9/30 17:21
