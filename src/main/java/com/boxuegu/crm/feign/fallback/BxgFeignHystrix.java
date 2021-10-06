@@ -1,7 +1,7 @@
 package com.boxuegu.crm.feign.fallback;
 
 import com.boxuegu.crm.feign.BxgFeignApi;
-import com.boxuegu.crm.model.response.BxgResponse;
+import com.boxuegu.crm.model.dto.BxgRespDTO;
 import com.boxuegu.crm.model.dto.SuccessOrderDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BxgFeignHystrix implements BxgFeignApi {
     @Override
-    public BxgResponse<SuccessOrderDTO> findFirstOrderTransfer(String orderId) {
+    public BxgRespDTO<SuccessOrderDTO> findFirstOrderTransfer(String orderId) {
         log.info("[BxgFeignHystrix#findFirstOrderTransfer] 降级处理，参数orderId={}", orderId);
         return null;
     }

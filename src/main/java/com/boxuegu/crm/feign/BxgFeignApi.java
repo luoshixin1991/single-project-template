@@ -2,7 +2,7 @@ package com.boxuegu.crm.feign;
 
 import com.boxuegu.crm.feign.fallback.BxgFeignFallbackFactory;
 import com.boxuegu.crm.interceptor.BxgFeignAuthorizationInterceptor;
-import com.boxuegu.crm.model.response.BxgResponse;
+import com.boxuegu.crm.model.dto.BxgRespDTO;
 import com.boxuegu.crm.model.dto.SuccessOrderDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,5 +29,5 @@ public interface BxgFeignApi {
      * @return com.boxuegu.crm.model.dto.SuccessOrderDTO
      */
     @GetMapping("/crm/order/first/transfer")
-    BxgResponse<SuccessOrderDTO> findFirstOrderTransfer(@RequestParam(value = "orderId") String orderId);
+    BxgRespDTO<SuccessOrderDTO> findFirstOrderTransfer(@RequestParam(value = "orderId") String orderId);
 }
