@@ -284,7 +284,6 @@ mybatis-plus:
   <artifactId>spring-boot-configuration-processor</artifactId>
   <optional>true</optional>
 </dependency>
-
 ```
 
 For further reference, please consider the following sections:
