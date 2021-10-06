@@ -275,9 +275,17 @@ mybatis-plus:
 1、使用@Configuration和@EnableConfigurationProperties注册
 2、使用@Component注册
 3、启动类上使用@ConfigurationPropertiesScan扫描注册（推荐）
+
+注意：
+@ConfigurationProperties注解类可能会有以下提示“spring boot configuration annotation processor notfound in classpath”，
+可以引入以下依赖来消除，如果不加这个依赖也可以，不会有任何问题，只是会有这个提示
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-configuration-processor</artifactId>
+  <optional>true</optional>
+</dependency>
+
 ```
-
-
 
 For further reference, please consider the following sections:
 

@@ -95,6 +95,16 @@
         </dependency>
         <!-- ===================== 引入mybatis plus end ===================== -->
 
+        <!--
+        @ConfigurationProperties注解类可能会有以下提示“spring boot configuration annotation processor notfound in classpath”，
+        此依赖用来消除这俄格提示，没有别的用处
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
