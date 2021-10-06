@@ -267,6 +267,17 @@ mybatis-plus:
 4、启动类上加@MapperScan扫描所有的mapper类（或者在每个mapper类上加@Mapper注解，但是每个类都加很麻烦）
 ```
 
+### 映射yml中属性值到bean中
+
+``` 
+@ConfigurationProperties(prefix=”xxxx”) 用來获取相同父标签的元素的值，
+但是此标签不能将@ConfigurationProperties注解的类注入到ioc容器中,需要用以下方式的任意一种，才能注入到ioc容器中
+1、使用@Configuration和@EnableConfigurationProperties注册
+2、使用@Component注册
+3、启动类上使用@ConfigurationPropertiesScan扫描注册（推荐）
+```
+
+
 
 For further reference, please consider the following sections:
 

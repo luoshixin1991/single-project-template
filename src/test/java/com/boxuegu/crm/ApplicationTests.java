@@ -2,6 +2,8 @@ package com.boxuegu.crm;
 
 import com.boxuegu.crm.feign.BxgFeignApi;
 import com.boxuegu.crm.manager.RedisManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
