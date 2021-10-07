@@ -43,6 +43,7 @@
 
     <!-- <appender> 输出器, Logback 将输出日志记录的任务交给名为 appender 的组件来完成 -->
     <appender name="root" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/root.log</file>
         <!--
           <rollingPolicy>用来设置日志的滚动策略，当达到条件后会自动将条件前的日志生成一个备份日志文件，条件后的日志输出到最新的日志文件中。
           常用的是按照时间来滚动（使用的类TimeBaseRollingPolicy）,还有一种就是基于索引来实现（使用的类FixedWindowRollingPolicy）
@@ -65,6 +66,7 @@
     </appender>
 
     <appender name="infoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/info.log</file>
         <!-- LevelFilter通过定义日志级别，并设置匹配与不匹配的处理策略来控制针对某个级别日志的输出策略 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>error</level>
@@ -97,6 +99,7 @@
     </appender>
 
     <appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/error.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>error</level>
         </filter>
