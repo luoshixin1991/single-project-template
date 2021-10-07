@@ -96,6 +96,17 @@
         <!-- ===================== 引入mybatis plus end ===================== -->
 
         <!--
+        输出json格式的日志到文件
+        用来支持<encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        不引入会报错java.lang.ClassNotFoundException: net.logstash.logback.encoder.LogstashEncoder
+        -->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>6.6</version>
+        </dependency>
+
+        <!--
         @ConfigurationProperties注解类可能会有以下提示“spring boot configuration annotation processor notfound in classpath”，
         此依赖用来消除这俄格提示，没有别的用处
         -->

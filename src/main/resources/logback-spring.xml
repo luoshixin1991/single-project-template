@@ -61,9 +61,7 @@
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
         <!-- Appender是logback中最重要的组件之一,它委托encoder组件来完成LoggingEvent的格式化和记录 -->
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>${FILE_LOG_PATTERN}</pattern>
-        </encoder>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
 
     <appender name="infoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -95,9 +93,7 @@
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
         <!-- Appender是logback中最重要的组件之一,它委托encoder组件来完成LoggingEvent的格式化和记录 -->
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>${FILE_LOG_PATTERN}</pattern>
-        </encoder>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
 
     <appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -113,9 +109,7 @@
             <maxHistory>7</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>${FILE_LOG_PATTERN}</pattern>
-        </encoder>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
 
     <!--生产环境:打印控制台和输出到文件-->
