@@ -121,10 +121,10 @@
           <logger>标签的作用：为不同的包使用不同的log配置
           logger的默认配置具有继承特性， 即所有的logger配置继承根logger(<root>),若使用了additivity="false"表示不继承父logger的配置
         -->
-        <logger name="${package}" level="INFO">
+        <logger name="${package}" level="INFO" additivity="false">
             <appender-ref ref="infoLog"/>
         </logger>
-        <logger name="${package}" level="ERROR">
+        <logger name="${package}" level="ERROR" additivity="false">
             <appender-ref ref="errorLog"/>
         </logger>
         <!--
@@ -144,10 +144,10 @@
           <logger>标签的作用：为不同的包使用不同的log配置
           logger的默认配置具有继承特性， 即所有的logger配置继承根logger(<root>),若使用了additivity="false"表示不继承父logger的配置
         -->
-        <logger name="${package}" level="INFO">
+        <logger name="${package}" level="INFO" additivity="false">
             <appender-ref ref="infoLog"/>
         </logger>
-        <logger name="${package}" level="ERROR">
+        <logger name="${package}" level="ERROR" additivity="false">
             <appender-ref ref="errorLog"/>
         </logger>
         <!--
