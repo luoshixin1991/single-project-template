@@ -119,7 +119,8 @@
     <springProfile name="prod">
         <!--
           <logger>标签的作用：为不同的包使用不同的log配置
-          logger的默认配置具有继承特性， 即所有的logger配置继承根logger(<root>),若使用了additivity="false"表示不继承父logger的配置
+          logger的默认配置具有继承特性， 即所有的logger配置继承根logger(<root>),若使用了additivity="false"表示不继承父logger的配置,
+          日志也不会传给<root>
         -->
         <logger name="${package}" level="INFO" additivity="false">
             <appender-ref ref="infoLog"/>
@@ -134,7 +135,6 @@
         -->
         <root level="INFO">
             <appender-ref ref="root"/>
-            <appender-ref ref="console"/>
         </root>
     </springProfile>
 
@@ -142,7 +142,8 @@
     <springProfile name="test">
         <!--
           <logger>标签的作用：为不同的包使用不同的log配置
-          logger的默认配置具有继承特性， 即所有的logger配置继承根logger(<root>),若使用了additivity="false"表示不继承父logger的配置
+          logger的默认配置具有继承特性， 即所有的logger配置继承根logger(<root>),若使用了additivity="false"表示不继承父logger的配置,
+          日志也不会传给<root>
         -->
         <logger name="${package}" level="INFO" additivity="false">
             <appender-ref ref="infoLog"/>
@@ -157,7 +158,6 @@
         -->
         <root level="INFO">
             <appender-ref ref="root"/>
-            <appender-ref ref="console"/>
         </root>
     </springProfile>
 
