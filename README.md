@@ -115,6 +115,7 @@ logback延用了log4j所有语法和规则，熟悉log4j的话学习logback更�
 如果没有特殊要求，可以不做任何配置，直接使用logback，默认级别是INFO，默认级别只会在控制台打印日志信息。
 
 3、在application.yml中配置logback
+  方式一
   （1）、如果只是想配置日志级别和日志文件保存路径的话，直接在application.yml中配置，配置方法如下：
 logging:
   level:
@@ -123,6 +124,12 @@ logging:
   file: d:/log/springboot-test04.log # 定义日志文件的路径，可以是相对路径也可以是绝对路径,不同版本的springboot配置名可能不同
   默认的日志文件能存储10MB内容，大于10MB就会生成一个压缩文件，然后重新记录，压缩文件有以前的日志信息。
   
+  方式二
+   (1)、application.yml中配置如下内容
+   logging:
+     level:
+       # 此包下所有class以DEBUG级别输出
+       com.boxuegu.crm: debug
   （2）、自定义logback-spring.xml文件，如果想自由定义日志级别、输出格式、备份日志策略等等，
   我们就在src/main/resource下面要创建logback-spring.xml文件进行自定义配置，这里使用了
   <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>来将日志以json的形式打印到文件，

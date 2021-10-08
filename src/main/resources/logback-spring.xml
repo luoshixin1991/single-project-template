@@ -132,6 +132,9 @@
           SpringBoot 项目，如果使用单独的 LogBack 配置文件，
           SpringBoot 的配置文件 application.properties 配置的 logging.level.root
           将会覆盖的 Logback 配置文件中的 root 的配置，所以<root>和<logger>中设置level不会起作用
+
+          由于<logger>设置了additivity="false"，所以<logger>打印的crm指定包下的数据不会交给<root>打印，
+          所以这里<root>会答应程序其他包下的内容
         -->
         <root level="INFO">
             <appender-ref ref="root"/>
@@ -155,6 +158,9 @@
           SpringBoot 项目，如果使用单独的 LogBack 配置文件，
           SpringBoot 的配置文件 application.properties 配置的 logging.level.root
           将会覆盖的 Logback 配置文件中的 root 的配置，所以<root>和<logger>中设置level不会起作用
+
+          由于<logger>设置了additivity="false"，所以<logger>打印的crm指定包下的数据不会交给<root>打印，
+          所以这里<root>会答应程序其他包下的内容
         -->
         <root level="INFO">
             <appender-ref ref="root"/>

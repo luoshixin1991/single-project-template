@@ -23,6 +23,7 @@ class ApplicationTests {
         log.warn("这是warn");
         log.debug("这是debug");
         log.error("这是error");
+        log.trace("这是trace");
     }
 
     @Test
