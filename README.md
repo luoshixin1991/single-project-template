@@ -124,7 +124,25 @@ logging:
   默认的日志文件能存储10MB内容，大于10MB就会生成一个压缩文件，然后重新记录，压缩文件有以前的日志信息。
   
   （2）、自定义logback-spring.xml文件，如果想自由定义日志级别、输出格式、备份日志策略等等，
-  我们就在src/main/resource下面要创建logback-spring.xml文件进行自定义配置
+  我们就在src/main/resource下面要创建logback-spring.xml文件进行自定义配置，这里使用了
+  <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>来将日志以json的形式打印到文件，
+  所以需要引入以下依赖，否则会报错java.lang.ClassNotFoundException: net.logstash.logback.encoder.LogstashEncoder
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>6.6</version>
+        </dependency>
+        
+  (3)、logback提供MDC功能(MDC 的全称是 Mapped Diagnostic Context，映射诊断上下文(MDC))，因此可以方便自定义设置调用链id，
+  只需加入类com.boxuegu.crm.filter.ServiceTraceFilter即可，在发生web请求的时候，
+  日志中会生成自定义的serviceTraceId，logback-spring.xml文件通过 %X{serviceTraceId} 获取filter中配置的变量, 
+  <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>也会将serviceTraceId记录到日志中。
+  MDC在异步线程、线程池和dubbo请求中好像会失效，这里因为这样的使用场景少，就不做验证和解决，如需解决可以google
+  
+  MDC使用场景：MDC 类只包含静态方法。它允许开发人员在诊断上下文中放置信息，这些信息随后可由某些回签组件检索。MDC 按每个线程管理上下文信息。
+  通常，在开始为新的客户机请求提供服务时，开发人员将插入相关的上下文信息，如客户机id、客户机的IP地址、请求参数等到 MDC 中。
+  如果配置得当，登录组件将自动在每个日志条目中包含此信息
+
 
 4、日志级别
 ALL > DEBUG > INFO > WARN > ERROR > OFF 级别越低，输出日志越多，最低是ALL，所有都输出。最高是OFF，啥都不输出。

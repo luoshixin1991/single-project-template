@@ -13,6 +13,7 @@ import java.util.UUID;
 
 /**
  * 生成应用自己的tranceId
+ * OncePerRequestFilter够确保在一次请求只通过一次filter，而不需要重复执行，优先级比拦截器高
  *
  * @author lsx
  * @date 2021/10/7 16:13
@@ -30,7 +31,7 @@ public class ServiceTraceFilter extends OncePerRequestFilter {
         MDC.put(serviceTraceId, getTraceId());
         filterChain.doFilter(httpServletRequest, httpServletResponse);
         /*
-         避免如果是一个线程池，池中的线程会被重复利用的情况下，如果你没有结束后清除MDC的信息，
+         避免如果是一个线程池，池中的线程会在下次请求的时候被重复利用的情况下，如果没有在请求结束后清除MDC的信息，
          那么在下次设置之前，上次设置之后的这段日志，就会出现分类错乱的情况。
          */
         MDC.clear();
