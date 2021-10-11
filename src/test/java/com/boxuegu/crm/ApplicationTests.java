@@ -5,7 +5,9 @@ import com.boxuegu.crm.manager.RedisManager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import javax.annotation.Resource;
+import java.lang.reflect.InvocationTargetException;
 
 @Slf4j
 @SpringBootTest
@@ -16,7 +18,7 @@ class ApplicationTests {
     private RedisManager redisManager;
 
     @Test
-    void testFeignApi(){
+    void testFeignApi() {
         log.info("数据：{}", bxgFeignApi.findFirstOrderTransfer("7710af3936ad46b98497f10b9a3aa4bf"));
         log.warn("这是warn");
         log.debug("这是debug");
@@ -25,6 +27,7 @@ class ApplicationTests {
     }
 
     @Test
-    void contextLoads() {
+    void contextLoads() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
     }
+
 }
