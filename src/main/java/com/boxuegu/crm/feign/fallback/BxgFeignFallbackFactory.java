@@ -1,7 +1,6 @@
 package com.boxuegu.crm.feign.fallback;
 
 import com.boxuegu.crm.feign.BxgFeignApi;
-import com.boxuegu.crm.util.ErrorUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
@@ -22,8 +21,7 @@ public class BxgFeignFallbackFactory implements FallbackFactory<BxgFeignApi> {
 
     @Override
     public BxgFeignApi create(Throwable cause) {
-        log.error("[BxgFeignFallbackFactory#create] 调用博学谷接口失败，异常栈信息：{}",
-                ErrorUtil.getStackTraceAsString(cause));
+        log.error("[BxgFeignFallbackFactory#create] 调用博学谷接口失败", cause);
         return bxgFeignHystrix;
     }
 }
