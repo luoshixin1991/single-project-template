@@ -381,7 +381,7 @@ GET/env/{name}根据名称获取特定的环境属性值
 GET/flyway提供一份 Flyway 数据库迁移信息
 GET/liquidbase显示Liquibase 数据库迁移的纤细信息
 GET/health报告应用程序的健康指标，这些值由 HealthIndicator 的实现类提供
-GET/heapdumpdump 一份应用的 JVM 堆信息
+GET/heapdump 一份应用的 JVM 堆信息
 GET/httptrace显示HTTP足迹，最近100个HTTP request/repsponse
 GET/info获取应用程序的定制信息，这些信息由info打头的属性提供
 GET/logfile返回log file中的内容(如果 logging.file 或者 logging.path 被设置)
