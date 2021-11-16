@@ -338,6 +338,63 @@ mybatis-plus:
             </plugin>
 ```
 
+### Spring Boot Actuator 2.X 集成
+
+``` 
+1、添加依赖
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        
+2、添加配置
+management:
+  endpoints:
+    web:
+      exposure:
+        # 打开所有的监控点, 可以选择打开部分management.endpoints.web.exposure.exclude=beans,trace
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  server:
+    # 为了安全一般都启用独立的端口来访问后端的监控信息
+    port: ${ACTUATOR_SERVER_PORT:8081}
+    
+3、使用
+Actuator 默认所有的监控点路径都在/actuator/*, 例如：http://localhost:8081/actuator/health
+Actuator 提供了 13 个接口，具体如下所示。
+
+HTTP 方法路径描述
+
+GET/auditevents显示应用暴露的审计事件 (比如认证进入、订单失败)
+GET/beans描述应用程序上下文里全部的 Bean，以及它们的关系
+GET/conditions就是 1.0 的 /autoconfig ，提供一份自动配置生效的条件情况，记录哪些自动配置条件通过了，哪些没通过
+GET/configprops描述配置属性(包含默认值)如何注入Bean
+GET/env获取全部环境属性
+GET/env/{name}根据名称获取特定的环境属性值
+GET/flyway提供一份 Flyway 数据库迁移信息
+GET/liquidbase显示Liquibase 数据库迁移的纤细信息
+GET/health报告应用程序的健康指标，这些值由 HealthIndicator 的实现类提供
+GET/heapdumpdump 一份应用的 JVM 堆信息
+GET/httptrace显示HTTP足迹，最近100个HTTP request/repsponse
+GET/info获取应用程序的定制信息，这些信息由info打头的属性提供
+GET/logfile返回log file中的内容(如果 logging.file 或者 logging.path 被设置)
+GET/loggers显示和修改配置的loggers
+GET/metrics报告各种应用程序度量信息，比如内存用量和HTTP请求计数
+GET/metrics/{name}报告指定名称的应用程序度量值
+GET/scheduledtasks展示应用中的定时任务信息
+GET/sessions如果我们使用了 Spring Session 展示应用中的 HTTP sessions 信息
+POST/shutdown关闭应用程序，要求endpoints.shutdown.enabled设置为true
+GET/mappings描述全部的 URI路径，以及它们和控制器(包含Actuator端点)的映射关系
+GET/threaddump获取线程活动的快照
+```
+
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)

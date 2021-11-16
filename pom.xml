@@ -42,6 +42,18 @@
     </properties>
 
     <dependencies>
+        <!-- ===================== 引入Spring Boot Actuator begin ===================== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!-- ===================== 引入Spring Boot Actuator end ===================== -->
+
         <!-- ===================== 引入openfeign begin ===================== -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
