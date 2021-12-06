@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <!-- GroupID格式：com.{公司/BU(公司的事业部)}.业务线[.子业务线]，最多4级 -->
     <groupId>com.boxuegu.crm</groupId>
     <!-- ArtifactID格式：产品线名-模块名。语义不重复不遗漏，先到中央仓库去查证一下 -->
@@ -47,66 +46,56 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <!-- ===================== 引入Spring Boot Actuator end ===================== -->
-
         <!-- ===================== 引入openfeign begin ===================== -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>3.0.3</version>
         </dependency>
-
         <!-- 不引用这个会报错-->
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-gson</artifactId>
             <version>11.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
             <version>2.2.9.RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-httpclient</artifactId>
             <version>11.6</version>
         </dependency>
         <!-- ===================== 引入openfeign end ===================== -->
-
         <!-- ===================== 引入redis begin ===================== -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
         <!-- ===================== 引入redis end ===================== -->
-
         <!-- ===================== 引入mybatis plus begin ===================== -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.4.3</version>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.26</version>
         </dependency>
         <!-- ===================== 引入mybatis plus end ===================== -->
-
         <!-- ===================== 引入logback相关依赖 begin ===================== -->
         <!--
         输出json格式的日志到文件
@@ -119,7 +108,6 @@
             <version>6.6</version>
         </dependency>
         <!-- ===================== 引入logback相关依赖 end ===================== -->
-
         <!--
         @ConfigurationProperties注解类可能会有以下提示“spring boot configuration annotation processor notfound in classpath”，
         此依赖用来消除这俄格提示，没有别的用处
@@ -129,23 +117,19 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -179,7 +163,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.5.4</version>
             </plugin>
-
             <!-- 打包的跳过test -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -189,7 +172,6 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
-
             <!-- 防止springboot自动压缩resource目录下的文件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
