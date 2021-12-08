@@ -24,9 +24,9 @@ feign:
     enabled: true
     # Hystrix的超时时间设置为10秒
     connection-timeout: 10000
-    # feign最大连接数
+    # feign最大连接数, 默认200, 使用默认值可以不用配置
     max-connections: 200
-    # feign单个路径的最大连接数
+    # feign单个路径的最大连接数, 默认50, 使用默认值可以不用配置
     max-connections-per-route: 50
 
 logging:
