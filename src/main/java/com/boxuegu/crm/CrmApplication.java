@@ -12,8 +12,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableCaching
 @EnableFeignClients
 @SpringBootApplication
-public class Application {
+public class CrmApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(CrmApplication.class, args);
     }
 }
